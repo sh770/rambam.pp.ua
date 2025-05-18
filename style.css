@@ -1,0 +1,67 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    direction: rtl;
+    text-align: center;
+    background: linear-gradient(to bottom right, #f9d423, #ff4e50);
+    padding: 20px;
+    color: #333;
+  }
+
+  table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 60%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  input {
+    margin: 5px;
+    padding: 5px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ff3b2e;
+  }
+
+  .winner-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 3px solid green;
+    padding: 30px;
+    z-index: 10001;
+    font-size: 32px;
+    font-weight: bold;
+    color: green;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    pointer-events: none;
+  }
+
+  .confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10002;
+  }
