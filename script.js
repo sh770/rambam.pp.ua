@@ -1,22 +1,18 @@
 let participants = JSON.parse(localStorage.getItem("participants")) || [];
 let lotteryTitle = localStorage.getItem("lotteryTitle") || "";
-let lastWinner = "";
 
 function renderTable() {
     const table = document.getElementById("participantsTable");
     table.innerHTML = "";
     participants.forEach((p, i) => {
         table.innerHTML += `
-          <tr>
-            <td><input type="text" value="${p.name
-            }" onchange="updateName(${i}, this.value)"></td>
-            <td><input type="number" min="1" value="${p.tickets
-            }" onchange="updateTickets(${i}, this.value)"></td>
-            <td><button onclick="updateTickets(${i}, document.querySelectorAll('tbody input')[${i * 2 + 1
-            }].value)">שנה</button></td>
-            <td><button onclick="removeParticipant(${i})">X</button></td>
-          </tr>
-        `;
+      <tr>
+        <td><input type="text" value="${p.name}" onchange="updateName(${i}, this.value)"></td>
+        <td><input type="number" min="1" value="${p.tickets}" onchange="updateTickets(${i}, this.value)"></td>
+        <td><button onclick="updateTickets(${i}, document.querySelectorAll('tbody input')[${i * 2 + 1}].value)">שנה</button></td>
+        <td><button onclick="removeParticipant(${i})">X</button></td>
+      </tr>
+    `;
     });
 }
 
@@ -41,9 +37,7 @@ function renderTitle() {
 }
 
 function setLotteryTitle() {
-    const titleInput = document
-        .getElementById("lotteryTitleInput")
-        .value.trim();
+    const titleInput = document.getElementById("lotteryTitleInput").value.trim();
     if (!titleInput) return;
     lotteryTitle = titleInput;
     localStorage.setItem("lotteryTitle", lotteryTitle);
@@ -81,23 +75,17 @@ function resetParticipants() {
 
 function drawWinner() {
     let pool = [];
-    participants.forEach((p) => {
+    participants.forEach(p => {
         for (let i = 0; i < p.tickets; i++) {
             pool.push(p.name);
         }
     });
     if (pool.length === 0) return;
     const winner = pool[Math.floor(Math.random() * pool.length)];
-    lastWinner = winner;
-    document.getElementById(
-        "winnerPopup"
-    ).innerText = `🎉 הזוכה הוא: ${winner} 🎉`;
+    document.getElementById("winnerPopup").innerText = `🎉 הזוכה הוא: ${winner} 🎉`;
     document.getElementById("winnerPopup").style.display = "block";
     launchConfetti();
 }
-
-renderTable();
-renderTitle();
 
 function launchConfetti() {
     const canvas = document.getElementById("confettiCanvas");
@@ -112,13 +100,13 @@ function launchConfetti() {
             y: Math.random() * canvas.height - canvas.height,
             size: Math.random() * 8 + 2,
             speed: Math.random() * 3 + 1,
-            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`
         });
     }
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach((p) => {
+        pieces.forEach(p => {
             ctx.fillStyle = p.color;
             ctx.fillRect(p.x, p.y, p.size, p.size);
             p.y += p.speed;
@@ -135,3 +123,6 @@ function launchConfetti() {
         document.getElementById("winnerPopup").style.display = "none";
     }, 4000);
 }
+
+renderTable();
+renderTitle();

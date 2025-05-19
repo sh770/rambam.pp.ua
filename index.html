@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="he">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="UTF-8" />
-    <title>🎉 מערכת הגרלות עליזה 🎉</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>🎉 מערכת הגרלות עליזה 🎉</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 מערכת הגרלות עליזה 🎉</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
 
-    <input type="text" id="lotteryTitleInput" placeholder="כותרת ההגרלה" />
-    <button onclick="setLotteryTitle()">שמור כותרת</button>
-    <h2 id="lotteryTitleDisplay"></h2>
+  <h1>🎉 מערכת הגרלות עליזה 🎉</h1>
 
-    <input type="text" id="nameInput" placeholder="שם" />
-    <input type="number" id="ticketsInput" placeholder="כרטיסים" min="1" />
-    <button onclick="addParticipant()">הוסף</button>
+  <input type="text" id="lotteryTitleInput" placeholder="כותרת ההגרלה">
+  <button onclick="setLotteryTitle()">שמור כותרת</button>
+  <h2 id="lotteryTitleDisplay"></h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>שם</th>
-          <th>כרטיסים</th>
-          <th>עדכון</th>
-          <th>מחיקה</th>
-        </tr>
-      </thead>
-      <tbody id="participantsTable"></tbody>
-    </table>
+  <input type="text" id="nameInput" placeholder="שם">
+  <input type="number" id="ticketsInput" placeholder="כרטיסים" min="1">
+  <button onclick="addParticipant()">הוסף</button>
 
-    <button onclick="drawWinner()">הגרל!</button>
-    <button onclick="resetParticipants()">איפוס רשימה</button>
+  <table>
+    <thead>
+      <tr>
+        <th>שם</th>
+        <th>כרטיסים</th>
+        <th>עדכון</th>
+        <th>מחיקה</th>
+      </tr>
+    </thead>
+    <tbody id="participantsTable"></tbody>
+  </table>
 
-    <div id="winnerPopup" class="winner-overlay" style="display: none"></div>
-    <canvas class="confetti" id="confettiCanvas"></canvas>
+  <button onclick="drawWinner()">הגרל!</button>
+  <button onclick="resetParticipants()">איפוס רשימה</button>
 
-    <script src="script.js"></script>
-  </body>
+  <div id="winnerPopup" class="winner-overlay" style="display:none;"></div>
+  <canvas class="confetti" id="confettiCanvas"></canvas>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
