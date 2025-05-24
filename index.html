@@ -2,14 +2,13 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎉 מערכת הגרלות עליזה 🎉</title>
+  <title>הגרלה</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 
-  <h1>🎉 מערכת הגרלות עליזה 🎉</h1>
+  <h1 class="site-title">🎉 מערכת הגרלות עליזה 🎉</h1>
 
   <input type="text" id="lotteryTitleInput" placeholder="כותרת ההגרלה">
   <button onclick="setLotteryTitle()">שמור כותרת</button>
@@ -36,6 +35,7 @@
 
   <div id="winnerPopup" class="winner-overlay" style="display:none;"></div>
   <canvas class="confetti" id="confettiCanvas"></canvas>
+  <audio id="winSound" src="win-sound.mp3" preload="auto"></audio>
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script src="script.js"></script>
