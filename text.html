@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>ניתוח הודעות לפי שולח</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-family: monospace;
+      padding: 10px;
+      font-size: 14px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>ניתוח הודעות לפי שולח וסימון</h2>
+
+  <textarea id="inputText" placeholder="הדבק כאן את ההודעות..."></textarea>
+  <br>
+  <button onclick="analyze()">נתח</button>
+  <a href="https://rambam.pp.ua/" target="_blank">
+  <button style="margin-top: 10px;">מעבר לאתר ההגרלות לרמב"ם יומי</button>
+</a>
+ 
+
+
+  <div class="results" id="output"></div>
+
+  <script>
+    // פונקציית ניתוח הנתונים מהטקסט
+    function analyze() {
+      const rawText = document.getElementById('inputText').value;
+      const lines = rawText.split('\n');
+      const parsedData = [];
+      let lastSender = null;
+
+      // שלב 1: חילוץ שורות עם שולח ותוכן
+      for (let line of lines) {
+        const match = line.match(/^\[(\d{1,2}\.\d{1,2}), (\d{2}:\d{2})\] ([^:]+): (.+)$/);
+
+        if (match) {
+          const [, , , sender, content] = match;
+          lastSender = sender;
+          parsedData.push({ sender, content: content.trim() });
+        } else if (line.trim() !== '' && lastSender) {
+          const lastEntry = parsedData[parsedData.length - 1];
+          lastEntry.content += ' ' + line.trim();
+        }
+      }
+
+      // שלב 2: ניתוח לפי שולח וסימון
+      const statsBySender = {};
+
+      for (let entry of parsedData) {
+        const sender = entry.sender;
+        const content = entry.content;
+
+        if (!statsBySender[sender]) {
+          statsBySender[sender] = {
+            totalMessages: 0,
+            marks: {
+              '✅': 0,
+              '✔️': 0,
+              'ללא סימון': 0
+            }
+          };
+        }
+
+        statsBySender[sender].totalMessages++;
+
+        if (content.includes('✅')) {
+          statsBySender[sender].marks['✅']++;
+        } else if (content.includes('✔️')) {
+          statsBySender[sender].marks['✔️']++;
+        } else {
+          statsBySender[sender].marks['ללא סימון']++;
+        }
+      }
+
+      // שלב 3: יצירת הפלט
+      let output = '';
+      for (let sender in statsBySender) {
+        const stats = statsBySender[sender];
+        output += `שולח: ${sender}\n`;
+        output += `מספר הודעות: ${stats.totalMessages}\n`;
+        output += `סימונים:\n`;
+        output += `- ✅: ${stats.marks['✅']}\n`;
+        output += `- ✔️: ${stats.marks['✔️']}\n`;
+        output += `- ללא סימון: ${stats.marks['ללא סימון']}\n`;
+        output += '--------------------------\n';
+      }
+
+      document.getElementById('output').textContent = output || 'לא נמצאו נתונים.';
+    }
+  </script>
+
+</body>
+</html>
