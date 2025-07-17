@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ניתוח הודעות</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>ניתוח הודעות לפי סימונים</h1>
+    <textarea id="messageInput" placeholder="הדבק כאן את ההודעות שלך..." rows="10" cols="50"></textarea>
+    <button onclick="analyzeText()">נתח</button>
+    <div id="error" class="error"></div>
+    <div id="outputContainer">
+      <table id="outputTable"></table>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
